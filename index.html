@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Palcos - Fanki</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">FANKI</span>
+            </div>
+
+            <div class="nav-section">
+                <span class="nav-section-title">INTELIGENCIA DE NEGOCIOS</span>
+                <div class="nav-item">
+                    <i data-lucide="trending-up"></i>
+                    <span>Ventas</span>
+                    <i data-lucide="chevron-right" class="nav-chevron"></i>
+                </div>
+                <div class="nav-item">
+                    <i data-lucide="credit-card"></i>
+                    <span>Pagos</span>
+                    <i data-lucide="chevron-right" class="nav-chevron"></i>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <span class="nav-section-title">AUTOGESTIÓN</span>
+                <div class="nav-item">
+                    <i data-lucide="calendar"></i>
+                    <span>Eventos</span>
+                    <i data-lucide="chevron-right" class="nav-chevron"></i>
+                </div>
+                <div class="nav-group expanded">
+                    <div class="nav-item active">
+                        <i data-lucide="shopping-bag"></i>
+                        <span>Gestión comercial</span>
+                        <i data-lucide="chevron-down" class="nav-chevron"></i>
+                    </div>
+                    <div class="nav-submenu">
+                        <a href="#" class="nav-subitem">Búsqueda de ordenes</a>
+                        <a href="#" class="nav-subitem">Reservas</a>
+                        <a href="#" class="nav-subitem">Pre-registro</a>
+                        <a href="#" class="nav-subitem current">Administración de Palcos</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="collapse-btn">
+                        <i data-lucide="chevrons-left"></i>
+                    </button>
+                    <div class="club-selector">
+                        <div class="club-icon"></div>
+                        <span>Atlas</span>
+                        <i data-lucide="chevrons-up-down"></i>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="notif-btn">
+                        <i data-lucide="bell"></i>
+                    </button>
+                    <div class="avatar">GH</div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content">
+                <h1 class="page-title">Administración de Palcos</h1>
+
+                <!-- Event Selector -->
+                <div class="selector-row">
+                    <div class="selector-group">
+                        <label class="selector-label">Evento / Abono</label>
+                        <div class="selector-dropdown" id="eventSelector">
+                            <i data-lucide="calendar"></i>
+                            <span id="selectedEvent">Seleccionar evento o abono...</span>
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="dropdown-menu" id="eventDropdown">
+                            <div class="dropdown-section">
+                                <span class="dropdown-section-title">ABONOS</span>
+                                <div class="dropdown-item" data-type="abono" data-id="1">Abono Clausura 2025</div>
+                                <div class="dropdown-item" data-type="abono" data-id="2">Abono Apertura 2025</div>
+                            </div>
+                            <div class="dropdown-section">
+                                <span class="dropdown-section-title">EVENTOS</span>
+                                <div class="dropdown-item" data-type="evento" data-id="3">América vs Chivas - 15/03/2025</div>
+                                <div class="dropdown-item" data-type="evento" data-id="4">América vs Cruz Azul - 22/03/2025</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content shown after event selection -->
+                <div id="eventContent" class="hidden">
+                    <!-- Inherit Banner -->
+                    <div class="inherit-banner" id="inheritBanner">
+                        <i data-lucide="info"></i>
+                        <span>Este evento tiene asignaciones heredadas de: <strong id="inheritFrom"></strong></span>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="metrics-row">
+                        <div class="metric-card">
+                            <span class="metric-label">Asientos Asignados</span>
+                            <span class="metric-value" id="metricAsignados">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Asientos Reservados</span>
+                            <span class="metric-value" id="metricReservados">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Usuarios con Palcos</span>
+                            <span class="metric-value" id="metricUsuarios">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Total Secciones</span>
+                            <span class="metric-value" id="metricSecciones">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab active" data-tab="asignaciones">
+                                <i data-lucide="users"></i>
+                                <span>Asignaciones</span>
+                            </button>
+                            <button class="tab" data-tab="reservas">
+                                <i data-lucide="bookmark"></i>
+                                <span>Reservas</span>
+                            </button>
+                            <button class="tab" data-tab="cargar">
+                                <i data-lucide="upload"></i>
+                                <span>Cargar datos</span>
+                            </button>
+                        </div>
+
+                        <!-- Tab Content: Asignaciones -->
+                        <div class="tab-content active" id="tab-asignaciones">
+                            <div class="toolbar">
+                                <div class="search-box">
+                                    <i data-lucide="search"></i>
+                                    <input type="text" placeholder="Buscar por email..." id="searchInput">
+                                </div>
+                                <button class="btn btn-secondary" id="exportBtn">
+                                    <i data-lucide="download"></i>
+                                    <span>Exportar CSV</span>
+                                </button>
+                            </div>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <div class="th th-user">Usuario</div>
+                                    <div class="th th-seccion">Sección</div>
+                                    <div class="th th-asiento">Asiento</div>
+                                    <div class="th th-fecha">Fecha</div>
+                                    <div class="th th-acciones">Acciones</div>
+                                </div>
+                                <div class="table-body" id="asignacionesTable">
+                                    <div class="empty-state">
+                                        <i data-lucide="inbox"></i>
+                                        <p>No hay asignaciones para este evento</p>
+                                        <span>Carga un archivo CSV en la pestaña "Cargar datos"</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab Content: Reservas -->
+                        <div class="tab-content" id="tab-reservas">
+                            <div class="toolbar">
+                                <div class="search-box">
+                                    <i data-lucide="search"></i>
+                                    <input type="text" placeholder="Buscar por sección...">
+                                </div>
+                            </div>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <div class="th th-seccion">Sección</div>
+                                    <div class="th th-asiento">Asiento</div>
+                                    <div class="th th-user">Usuario Reserva</div>
+                                    <div class="th th-fecha">Fecha</div>
+                                </div>
+                                <div class="table-body" id="reservasTable">
+                                    <div class="empty-state">
+                                        <i data-lucide="inbox"></i>
+                                        <p>No hay reservas para este evento</p>
+                                        <span>Carga un archivo CSV en la pestaña "Cargar datos"</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab Content: Cargar datos -->
+                        <div class="tab-content" id="tab-cargar">
+                            <!-- Upload Asignaciones -->
+                            <div class="upload-section">
+                                <div class="upload-header">
+                                    <div class="upload-title">
+                                        <h3>Cargar Asignaciones</h3>
+                                        <p>Sube un archivo CSV para asignar asientos a usuarios. Esto creará tickets tipo "Dueño" para cada usuario.</p>
+                                    </div>
+                                    <button class="btn btn-secondary" id="downloadTemplateAsig">
+                                        <i data-lucide="download"></i>
+                                        <span>Descargar plantilla CSV</span>
+                                    </button>
+                                </div>
+                                <div class="dropzone" id="dropzoneAsignaciones">
+                                    <i data-lucide="cloud-upload"></i>
+                                    <p>Arrastra tu archivo aquí o haz clic para seleccionar</p>
+                                    <span>CSV hasta 10MB</span>
+                                    <input type="file" accept=".csv" id="fileAsignaciones" hidden>
+                                </div>
+                                <div class="upload-actions">
+                                    <div class="file-info" id="fileInfoAsig"></div>
+                                    <button class="btn btn-primary" id="btnCargarAsignaciones" disabled>
+                                        <i data-lucide="upload"></i>
+                                        <span>Cargar asignaciones</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Upload Reservas -->
+                            <div class="upload-section">
+                                <div class="upload-header">
+                                    <div class="upload-title">
+                                        <h3>Cargar Reservas</h3>
+                                        <p>Sube un archivo CSV para crear reservas de asientos. Los asientos quedarán reservados para gestión del club.</p>
+                                    </div>
+                                    <button class="btn btn-secondary" id="downloadTemplateRes">
+                                        <i data-lucide="download"></i>
+                                        <span>Descargar plantilla CSV</span>
+                                    </button>
+                                </div>
+                                <div class="dropzone" id="dropzoneReservas">
+                                    <i data-lucide="cloud-upload"></i>
+                                    <p>Arrastra tu archivo aquí o haz clic para seleccionar</p>
+                                    <span>CSV hasta 10MB</span>
+                                    <input type="file" accept=".csv" id="fileReservas" hidden>
+                                </div>
+                                <div class="upload-actions">
+                                    <div class="file-info" id="fileInfoRes"></div>
+                                    <button class="btn btn-primary" id="btnCargarReservas" disabled>
+                                        <i data-lucide="upload"></i>
+                                        <span>Cargar reservas</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty state when no event selected -->
+                <div id="emptyState" class="empty-state-large">
+                    <i data-lucide="calendar-search"></i>
+                    <h2>Selecciona un evento o abono</h2>
+                    <p>Para gestionar los palcos, primero selecciona un evento o abono del listado superior.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="confirmModal">
+            <div class="modal-header">
+                <i data-lucide="alert-triangle" class="modal-icon warning"></i>
+                <h3 id="modalTitle">Confirmar acción</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage"></p>
+                <div class="confirm-input-wrapper" id="confirmInputWrapper">
+                    <label>Escribe <strong>CONFIRMAR</strong> para continuar:</label>
+                    <input type="text" id="confirmInput" placeholder="CONFIRMAR">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
+                <button class="btn btn-danger" id="modalConfirm" disabled>Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de resultado -->
+    <div class="modal-overlay" id="resultModalOverlay">
+        <div class="modal" id="resultModal">
+            <div class="modal-header">
+                <i data-lucide="check-circle" class="modal-icon success" id="resultIcon"></i>
+                <h3 id="resultTitle">Carga completada</h3>
+            </div>
+            <div class="modal-body">
+                <div class="result-summary" id="resultSummary"></div>
+                <div class="result-errors" id="resultErrors"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="resultClose">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
