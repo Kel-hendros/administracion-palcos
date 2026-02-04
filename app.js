@@ -204,14 +204,72 @@ function selectEvent(event) {
         inheritBanner.classList.add('hidden');
     }
 
-    // Reset data
-    state.asignaciones = [];
-    state.reservas = [];
+    // Load demo data for "América vs Chivas" event
+    if (event.id === '3') {
+        loadDemoDataForEvent();
+    } else {
+        // Reset data for other events
+        state.asignaciones = [];
+        state.reservas = [];
+    }
+
     updateMetrics();
     renderAsignaciones();
     renderReservas();
 
     lucide.createIcons();
+}
+
+// Demo data for América vs Chivas
+function loadDemoDataForEvent() {
+    state.asignaciones = [
+        // María López - 5 asientos directos (propietaria de palco)
+        { email: 'maria.lopez@email.com', section_code: 'PALCO_VIP_B', seat: 'B-01', fecha: '02/02/2025', origen: 'directo' },
+        { email: 'maria.lopez@email.com', section_code: 'PALCO_VIP_B', seat: 'B-02', fecha: '02/02/2025', origen: 'directo' },
+        { email: 'maria.lopez@email.com', section_code: 'PALCO_VIP_B', seat: 'B-03', fecha: '02/02/2025', origen: 'directo' },
+        { email: 'maria.lopez@email.com', section_code: 'PALCO_VIP_B', seat: 'B-04', fecha: '02/02/2025', origen: 'directo' },
+        { email: 'maria.lopez@email.com', section_code: 'PALCO_VIP_B', seat: 'B-05', fecha: '02/02/2025', origen: 'directo' },
+
+        // Carlos García - 2 asientos heredados de abono
+        { email: 'carlos.garcia@email.com', section_code: 'PALCO_VIP_A', seat: 'A-01', fecha: '01/02/2025', origen: 'abono' },
+        { email: 'carlos.garcia@email.com', section_code: 'PALCO_VIP_A', seat: 'A-02', fecha: '01/02/2025', origen: 'abono' },
+
+        // Roberto Sánchez - 8 asientos directos (empresa)
+        { email: 'roberto.sanchez@empresa.mx', section_code: 'PALCO_EJECUTIVO', seat: 'E-01', fecha: '05/02/2025', origen: 'directo' },
+        { email: 'roberto.sanchez@empresa.mx', section_code: 'PALCO_EJECUTIVO', seat: 'E-02', fecha: '05/02/2025', origen: 'directo' },
+        { email: 'roberto.sanchez@empresa.mx', section_code: 'PALCO_EJECUTIVO', seat: 'E-03', fecha: '05/02/2025', origen: 'directo' },
+        { email: 'roberto.sanchez@empresa.mx', section_code: 'PALCO_EJECUTIVO', seat: 'E-04', fecha: '05/02/2025', origen: 'directo' },
+        { email: 'roberto.sanchez@empresa.mx', section_code: 'PALCO_EJECUTIVO', seat: 'E-05', fecha: '05/02/2025', origen: 'directo' },
+        { email: 'roberto.sanchez@empresa.mx', section_code: 'PALCO_EJECUTIVO', seat: 'E-06', fecha: '05/02/2025', origen: 'directo' },
+        { email: 'roberto.sanchez@empresa.mx', section_code: 'PALCO_EJECUTIVO', seat: 'E-07', fecha: '05/02/2025', origen: 'directo' },
+        { email: 'roberto.sanchez@empresa.mx', section_code: 'PALCO_EJECUTIVO', seat: 'E-08', fecha: '05/02/2025', origen: 'directo' },
+
+        // Ana Martínez - 3 asientos heredados de abono
+        { email: 'ana.martinez@gmail.com', section_code: 'PALCO_VIP_A', seat: 'A-05', fecha: '01/02/2025', origen: 'abono' },
+        { email: 'ana.martinez@gmail.com', section_code: 'PALCO_VIP_A', seat: 'A-06', fecha: '01/02/2025', origen: 'abono' },
+        { email: 'ana.martinez@gmail.com', section_code: 'PALCO_VIP_A', seat: 'A-07', fecha: '01/02/2025', origen: 'abono' },
+
+        // Juan Hernández - 2 asientos directos
+        { email: 'juan.hernandez@outlook.com', section_code: 'PALCO_C', seat: 'C-12', fecha: '03/02/2025', origen: 'directo' },
+        { email: 'juan.hernandez@outlook.com', section_code: 'PALCO_C', seat: 'C-13', fecha: '03/02/2025', origen: 'directo' },
+
+        // Patricia Ruiz - 4 asientos directos
+        { email: 'patricia.ruiz@empresa.com', section_code: 'PALCO_VIP_C', seat: 'VC-01', fecha: '04/02/2025', origen: 'directo' },
+        { email: 'patricia.ruiz@empresa.com', section_code: 'PALCO_VIP_C', seat: 'VC-02', fecha: '04/02/2025', origen: 'directo' },
+        { email: 'patricia.ruiz@empresa.com', section_code: 'PALCO_VIP_C', seat: 'VC-03', fecha: '04/02/2025', origen: 'directo' },
+        { email: 'patricia.ruiz@empresa.com', section_code: 'PALCO_VIP_C', seat: 'VC-04', fecha: '04/02/2025', origen: 'directo' },
+    ];
+
+    state.reservas = [
+        { email: 'reservas-atlas@fanki.co', section_code: 'PLATEA_A', seat: 'PA-101', fecha: '01/02/2025' },
+        { email: 'reservas-atlas@fanki.co', section_code: 'PLATEA_A', seat: 'PA-102', fecha: '01/02/2025' },
+        { email: 'reservas-atlas@fanki.co', section_code: 'PLATEA_A', seat: 'PA-103', fecha: '01/02/2025' },
+        { email: 'reservas-atlas@fanki.co', section_code: 'PLATEA_B', seat: 'PB-050', fecha: '01/02/2025' },
+        { email: 'reservas-atlas@fanki.co', section_code: 'PLATEA_B', seat: 'PB-051', fecha: '01/02/2025' },
+        { email: 'reservas-atlas@fanki.co', section_code: 'CORTESIA', seat: 'COR-01', fecha: '01/02/2025' },
+        { email: 'reservas-atlas@fanki.co', section_code: 'CORTESIA', seat: 'COR-02', fecha: '01/02/2025' },
+        { email: 'reservas-atlas@fanki.co', section_code: 'CORTESIA', seat: 'COR-03', fecha: '01/02/2025' },
+    ];
 }
 
 function switchTab(tabId) {
@@ -361,96 +419,129 @@ function getInitials(email) {
 function processCSV(file, type) {
     const reader = new FileReader();
     reader.onload = (e) => {
-        const text = e.target.result;
-        const lines = text.split('\n').filter(line => line.trim());
-        const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+        try {
+            const text = e.target.result;
+            // Handle different line endings (Windows, Mac, Unix)
+            const lines = text.split(/\r?\n/).filter(line => line.trim());
 
-        // Validate headers
-        const requiredHeaders = ['email', 'section_code', 'seat'];
-        const hasAllHeaders = requiredHeaders.every(h => headers.includes(h));
-
-        if (!hasAllHeaders) {
-            showToast('El archivo CSV no tiene las columnas requeridas: email, section_code, seat', 'error');
-            return;
-        }
-
-        const emailIdx = headers.indexOf('email');
-        const sectionIdx = headers.indexOf('section_code');
-        const seatIdx = headers.indexOf('seat');
-
-        const results = { success: 0, errors: [] };
-        const newItems = [];
-
-        for (let i = 1; i < lines.length; i++) {
-            const values = parseCSVLine(lines[i]);
-            if (values.length < 3) continue;
-
-            const email = values[emailIdx]?.trim();
-            const section_code = values[sectionIdx]?.trim();
-            const seat = values[seatIdx]?.trim();
-
-            // Validate
-            if (!email || !section_code || !seat) {
-                results.errors.push({ row: i + 1, email, section_code, seat, error: 'Campos vacíos' });
-                continue;
+            if (lines.length < 2) {
+                showToast('El archivo CSV está vacío o solo tiene encabezados', 'error');
+                return;
             }
 
-            if (!email.includes('@')) {
-                results.errors.push({ row: i + 1, email, section_code, seat, error: 'Email inválido' });
-                continue;
+            // Parse headers - handle potential BOM and clean them
+            const headerLine = lines[0].replace(/^\uFEFF/, ''); // Remove BOM if present
+            const headers = parseCSVLine(headerLine).map(h => h.trim().toLowerCase().replace(/['"]/g, ''));
+
+            console.log('Headers encontrados:', headers);
+
+            // Validate headers
+            const requiredHeaders = ['email', 'section_code', 'seat'];
+            const hasAllHeaders = requiredHeaders.every(h => headers.includes(h));
+
+            if (!hasAllHeaders) {
+                showToast('El archivo CSV no tiene las columnas requeridas: email, section_code, seat', 'error');
+                console.log('Headers requeridos:', requiredHeaders);
+                console.log('Headers encontrados:', headers);
+                return;
             }
 
-            // Check for duplicates
-            const isDuplicate = type === 'asignaciones'
-                ? state.asignaciones.some(a => a.section_code === section_code && a.seat === seat)
-                : state.reservas.some(r => r.section_code === section_code && r.seat === seat);
+            const emailIdx = headers.indexOf('email');
+            const sectionIdx = headers.indexOf('section_code');
+            const seatIdx = headers.indexOf('seat');
 
-            if (isDuplicate) {
-                results.errors.push({ row: i + 1, email, section_code, seat, error: 'Asiento ya ocupado' });
-                continue;
+            const results = { success: 0, errors: [] };
+            const newItems = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue; // Skip empty lines
+
+                const values = parseCSVLine(line);
+
+                // Clean values
+                const email = (values[emailIdx] || '').trim().replace(/['"]/g, '');
+                const section_code = (values[sectionIdx] || '').trim().replace(/['"]/g, '');
+                const seat = (values[seatIdx] || '').trim().replace(/['"]/g, '');
+
+                // Validate
+                if (!email || !section_code || !seat) {
+                    results.errors.push({ row: i + 1, email, section_code, seat, error: 'Campos vacíos' });
+                    continue;
+                }
+
+                if (!email.includes('@')) {
+                    results.errors.push({ row: i + 1, email, section_code, seat, error: 'Email inválido' });
+                    continue;
+                }
+
+                // Check for duplicates in current state
+                const isDuplicateInState = type === 'asignaciones'
+                    ? state.asignaciones.some(a => a.section_code === section_code && a.seat === seat)
+                    : state.reservas.some(r => r.section_code === section_code && r.seat === seat);
+
+                // Check for duplicates in new items being added
+                const isDuplicateInNew = newItems.some(item =>
+                    item.section_code === section_code && item.seat === seat
+                );
+
+                if (isDuplicateInState || isDuplicateInNew) {
+                    results.errors.push({ row: i + 1, email, section_code, seat, error: 'Asiento ya ocupado' });
+                    continue;
+                }
+
+                newItems.push({
+                    email,
+                    section_code,
+                    seat,
+                    fecha: new Date().toLocaleDateString('es-ES'),
+                    origen: 'directo'
+                });
+                results.success++;
             }
 
-            newItems.push({
-                email,
-                section_code,
-                seat,
-                fecha: new Date().toLocaleDateString('es-ES'),
-                origen: 'directo'
-            });
-            results.success++;
+            console.log('Items procesados:', newItems.length);
+            console.log('Errores:', results.errors.length);
+
+            // Add to state
+            if (type === 'asignaciones') {
+                state.asignaciones = [...state.asignaciones, ...newItems];
+                renderAsignaciones();
+            } else {
+                state.reservas = [...state.reservas, ...newItems];
+                renderReservas();
+            }
+
+            updateMetrics();
+            showResultModal(results, type);
+
+            // Reset file input
+            if (type === 'asignaciones') {
+                state.fileAsignaciones = null;
+                fileInfoAsig.textContent = '';
+                fileInfoAsig.classList.remove('has-file');
+                btnCargarAsignaciones.disabled = true;
+                fileAsignaciones.value = '';
+            } else {
+                state.fileReservas = null;
+                fileInfoRes.textContent = '';
+                fileInfoRes.classList.remove('has-file');
+                btnCargarReservas.disabled = true;
+                fileReservas.value = '';
+            }
+
+            // Switch to corresponding tab
+            switchTab(type === 'asignaciones' ? 'asignaciones' : 'reservas');
+
+        } catch (error) {
+            console.error('Error procesando CSV:', error);
+            showToast('Error al procesar el archivo CSV', 'error');
         }
-
-        // Add to state
-        if (type === 'asignaciones') {
-            state.asignaciones = [...state.asignaciones, ...newItems];
-            renderAsignaciones();
-        } else {
-            state.reservas = [...state.reservas, ...newItems];
-            renderReservas();
-        }
-
-        updateMetrics();
-        showResultModal(results, type);
-
-        // Reset file input
-        if (type === 'asignaciones') {
-            state.fileAsignaciones = null;
-            fileInfoAsig.textContent = '';
-            fileInfoAsig.classList.remove('has-file');
-            btnCargarAsignaciones.disabled = true;
-            fileAsignaciones.value = '';
-        } else {
-            state.fileReservas = null;
-            fileInfoRes.textContent = '';
-            fileInfoRes.classList.remove('has-file');
-            btnCargarReservas.disabled = true;
-            fileReservas.value = '';
-        }
-
-        // Switch to corresponding tab
-        switchTab(type === 'asignaciones' ? 'asignaciones' : 'reservas');
     };
-    reader.readAsText(file);
+    reader.onerror = () => {
+        showToast('Error al leer el archivo', 'error');
+    };
+    reader.readAsText(file, 'UTF-8');
 }
 
 function parseCSVLine(line) {
@@ -458,18 +549,21 @@ function parseCSVLine(line) {
     let current = '';
     let inQuotes = false;
 
+    // Handle both comma and semicolon as delimiters
+    const delimiter = line.includes(';') && !line.includes(',') ? ';' : ',';
+
     for (let i = 0; i < line.length; i++) {
         const char = line[i];
-        if (char === '"') {
+        if (char === '"' || char === "'") {
             inQuotes = !inQuotes;
-        } else if (char === ',' && !inQuotes) {
-            result.push(current);
+        } else if (char === delimiter && !inQuotes) {
+            result.push(current.trim());
             current = '';
-        } else {
+        } else if (char !== '\r') { // Ignore carriage return
             current += char;
         }
     }
-    result.push(current);
+    result.push(current.trim());
     return result;
 }
 
